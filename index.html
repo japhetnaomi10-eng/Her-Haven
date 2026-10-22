@@ -1,0 +1,608 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7d9e8">
+<meta name="description" content="Blooming Girl: a safe space for girls aged 12 and above to learn, grow, and bloom.">
+<title>Blooming Girl | Learn, Grow & Bloom</title>
+
+<style>
+:root {
+  --pink:#f4a9cc;
+  --deep-pink:#a83270;
+  --soft-pink:#fff0f7;
+  --lavender:#d9cafa;
+  --deep-lavender:#6747a5;
+  --soft-lavender:#f4efff;
+  --white:#fff;
+  --ink:#38283e;
+  --muted:#746878;
+  --line:#f0dce9;
+  --shadow:0 8px 25px rgba(107,62,105,.09);
+}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; scroll-padding-top:90px; }
+body {
+  margin:0;
+  background:#fffafd;
+  color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  line-height:1.65;
+}
+button,input,textarea,select { font:inherit; }
+button,a { -webkit-tap-highlight-color:transparent; }
+button { cursor:pointer; }
+a { color:var(--deep-pink); }
+button:focus-visible,a:focus-visible,input:focus-visible,
+textarea:focus-visible,select:focus-visible {
+  outline:3px solid var(--lavender);
+  outline-offset:3px;
+}
+header {
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(255,250,253,.97);
+  border-bottom:1px solid var(--line);
+}
+.nav {
+  max-width:1100px;
+  margin:auto;
+  padding:12px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.brand {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  color:var(--ink);
+  font-weight:900;
+  font-size:19px;
+}
+.logo {
+  display:grid;
+  place-items:center;
+  width:43px;
+  height:43px;
+  border-radius:15px;
+  background:linear-gradient(135deg,var(--pink),var(--lavender));
+  font-size:24px;
+}
+.brand small {
+  display:block;
+  font-size:10px;
+  letter-spacing:1px;
+  color:var(--muted);
+}
+.nav-links {
+  display:flex;
+  gap:6px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.nav-links a {
+  padding:8px 10px;
+  border-radius:10px;
+  color:var(--ink);
+  text-decoration:none;
+  font-size:13px;
+  font-weight:750;
+}
+.nav-links a:hover { background:var(--soft-lavender); }
+.menu {
+  display:none;
+  padding:8px 12px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:white;
+  color:var(--ink);
+}
+main { max-width:1100px; margin:auto; padding:0 18px 45px; }
+.hero {
+  margin:26px 0 35px;
+  padding:clamp(25px,6vw,65px);
+  border:1px solid #f7e4f0;
+  border-radius:30px;
+  background:linear-gradient(120deg,#fff0f7,#f5efff 60%,#fff);
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  align-items:center;
+  gap:25px;
+}
+.eyebrow {
+  display:inline-block;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:99px;
+  padding:5px 12px;
+  color:var(--deep-pink);
+  font-size:12px;
+  font-weight:850;
+}
+h1 {
+  font-size:clamp(37px,6vw,65px);
+  line-height:1.08;
+  letter-spacing:-2px;
+  margin:16px 0;
+}
+h1 span { color:var(--deep-pink); }
+.hero p { color:var(--muted); font-size:17px; max-width:600px; }
+.hero-art {
+  font-size:clamp(90px,16vw,165px);
+  text-align:center;
+}
+.buttons { display:flex; gap:10px; flex-wrap:wrap; margin-top:20px; }
+.btn {
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  border:0;
+  border-radius:12px;
+  padding:12px 17px;
+  font-weight:800;
+  text-decoration:none;
+  transition:transform .15s;
+}
+.btn:hover { transform:translateY(-2px); }
+.primary { background:var(--deep-pink); color:white; }
+.secondary { background:white; color:var(--deep-lavender); border:1px solid var(--line); }
+.lavender-btn { background:var(--deep-lavender); color:white; }
+section { margin:45px 0; }
+.heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:12px;
+  margin-bottom:18px;
+}
+.heading h2 { margin:0; font-size:clamp(25px,4vw,34px); line-height:1.2; }
+.heading p { margin:5px 0 0; color:var(--muted); }
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:15px;
+}
+.card,.panel,.lesson-sidebar,.lesson-content {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+}
+.card {
+  padding:21px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+.card-icon {
+  width:53px;
+  height:53px;
+  display:grid;
+  place-items:center;
+  border-radius:17px;
+  background:var(--soft-pink);
+  font-size:26px;
+  margin-bottom:10px;
+}
+.card:nth-child(even) .card-icon { background:var(--soft-lavender); }
+.card h3 { margin:0 0 7px; font-size:19px; }
+.card p { color:var(--muted); font-size:14px; margin:0 0 15px; flex:1; }
+.text-btn {
+  padding:0;
+  border:0;
+  background:transparent;
+  color:var(--deep-pink);
+  font-weight:850;
+}
+.lesson-area {
+  display:grid;
+  grid-template-columns:250px minmax(0,1fr);
+  gap:18px;
+  align-items:start;
+}
+.lesson-sidebar { padding:16px; }
+.lesson-sidebar h3 { margin:0 0 10px; }
+.lesson-list { display:grid; gap:7px; }
+.lesson-choice {
+  width:100%;
+  text-align:left;
+  border:1px solid transparent;
+  background:#fff9fc;
+  color:var(--ink);
+  border-radius:11px;
+  padding:11px;
+  font-size:13px;
+  font-weight:750;
+}
+.lesson-choice.active {
+  background:var(--soft-lavender);
+  border-color:var(--lavender);
+  color:var(--deep-lavender);
+}
+.progress-track {
+  height:8px;
+  background:#f3e8f1;
+  border-radius:99px;
+  overflow:hidden;
+  margin:9px 0;
+}
+.progress-fill {
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--deep-pink),var(--deep-lavender));
+  transition:width .2s;
+}
+.muted { color:var(--muted); font-size:13px; }
+.lesson-content { padding:clamp(18px,4vw,30px); min-height:350px; }
+.lesson-content h3 { font-size:25px; line-height:1.25; margin:10px 0; }
+.lesson-content h4 { margin-bottom:5px; }
+.lesson-content p,.lesson-content li { color:#5d5062; }
+.lesson-content ul { padding-left:23px; }
+.callout {
+  padding:14px 16px;
+  border-radius:13px;
+  background:var(--soft-pink);
+  border-left:4px solid var(--deep-pink);
+  margin:16px 0;
+}
+.quiz { margin-top:20px; padding-top:15px; border-top:1px solid var(--line); }
+.quiz-options { display:grid; gap:8px; margin:12px 0; }
+.quiz-option {
+  width:100%;
+  text-align:left;
+  background:white;
+  border:1px solid #e8dce8;
+  border-radius:11px;
+  padding:11px 13px;
+  color:var(--ink);
+}
+.quiz-option:hover { border-color:var(--deep-lavender); }
+.quiz-option.correct { border-color:#4a8a65; background:#effaf2; }
+.quiz-option.wrong { border-color:#c45670; background:#fff0f3; }
+.quiz-option:disabled { cursor:default; }
+.feedback { min-height:24px; font-size:14px; font-weight:750; }
+.quote-panel {
+  padding:clamp(25px,5vw,45px);
+  border-radius:25px;
+  background:linear-gradient(135deg,#f8e4f0,#eee6ff);
+  text-align:center;
+}
+.quote-mark { font-size:42px; line-height:1; }
+#quoteText {
+  max-width:780px;
+  margin:15px auto;
+  font-size:clamp(22px,4vw,32px);
+  font-weight:850;
+  line-height:1.4;
+}
+.quote-credit { color:var(--muted); font-size:13px; }
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.panel { padding:22px; }
+.panel h3 { margin-top:0; }
+label { display:block; font-size:13px; font-weight:800; margin:12px 0 6px; }
+input,textarea,select {
+  width:100%;
+  border:1px solid #e6d8e6;
+  border-radius:11px;
+  padding:11px 12px;
+  color:var(--ink);
+  background:white;
+}
+textarea { min-height:120px; resize:vertical; }
+.privacy-note {
+  background:var(--soft-lavender);
+  padding:12px;
+  border-radius:11px;
+  color:#594776;
+  font-size:12px;
+}
+.contact-box {
+  background:linear-gradient(135deg,#fff0f7,#f4efff);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:clamp(22px,5vw,38px);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+.contact-box p { color:var(--muted); margin-bottom:0; }
+.notice { font-size:12px; color:var(--muted); margin-top:12px; }
+footer {
+  text-align:center;
+  border-top:1px solid var(--line);
+  padding:25px 18px 35px;
+  color:var(--muted);
+  font-size:13px;
+}
+[hidden] { display:none !important; }
+
+@media(max-width:800px) {
+  .hero { grid-template-columns:1fr; }
+  .hero-art { text-align:left; font-size:90px; }
+  .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .lesson-area { grid-template-columns:1fr; }
+  .two-col { grid-template-columns:1fr; }
+  .contact-box { align-items:flex-start; flex-direction:column; }
+  .menu { display:block; }
+  .nav-links { display:none; width:100%; }
+  .nav-links.open { display:flex; justify-content:flex-start; }
+  .nav-links a { background:white; border:1px solid var(--line); }
+}
+@media(max-width:480px) {
+  main { padding-left:13px; padding-right:13px; }
+  .grid { grid-template-columns:1fr; }
+  .heading { align-items:flex-start; flex-direction:column; }
+  .nav { padding:10px 13px; }
+  .hero { padding:24px; }
+  .brand { font-size:17px; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <nav class="nav" aria-label="Main navigation">
+    <a class="brand" href="#home">
+      <span class="logo" aria-hidden="true">🌸</span>
+      <span>Blooming Girl<small>LEARN · GROW · BLOOM</small></span>
+    </a>
+    <button class="menu" id="menuToggle" type="button"
+      aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#topics">Explore</a>
+      <a href="#lessons">Lessons</a>
+      <a href="#motivation">Motivation</a>
+      <a href="#journal">My journal</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div>
+      <span class="eyebrow">💗 Your journey starts here</span>
+      <h1>A safe space to <span>learn, grow,</span> and bloom.</h1>
+      <p>
+        Welcome to Blooming Girl! Explore girlhood, understand your changing
+        body, build healthy relationships, develop life skills, and discover
+        the wonderful person you are becoming.
+      </p>
+      <div class="buttons">
+        <a class="btn primary" href="#topics">Start exploring 🌷</a>
+        <a class="btn secondary" href="#motivation">A little encouragement</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">🌷💗</div>
+  </section>
+
+  <section id="topics">
+    <div class="heading">
+      <div>
+        <h2>Let's grow together</h2>
+        <p>Choose a topic and begin learning at your own pace.</p>
+      </div>
+      <span class="eyebrow">6 learning topics</span>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <div class="card-icon">🧼</div>
+        <h3>Personal hygiene</h3>
+        <p>Learn about daily care, periods, cleanliness, and caring for your body.</p>
+        <button class="text-btn" data-topic="hygiene">Explore lesson →</button>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">🌱</div>
+        <h3>Puberty & hormones</h3>
+        <p>Understand body changes, periods, emotions, and questions about growing up.</p>
+        <button class="text-btn" data-topic="puberty">Explore lesson →</button>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">💞</div>
+        <h3>Crushes & relationships</h3>
+        <p>Understand respect, consent, boundaries, friendships, and red flags.</p>
+        <button class="text-btn" data-topic="relationships">Explore lesson →</button>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">🦋</div>
+        <h3>Confidence & emotions</h3>
+        <p>Practice self-kindness, handle difficult feelings, and build confidence.</p>
+        <button class="text-btn" data-topic="confidence">Explore lesson →</button>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">🌟</div>
+        <h3>Everyday life skills</h3>
+        <p>Learn goal-setting, communication, money basics, and decision-making.</p>
+        <button class="text-btn" data-topic="lifeskills">Explore lesson →</button>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">✨</div>
+        <h3>Motivation & growth</h3>
+        <p>Find encouragement to learn, try new things, and grow at your own pace.</p>
+        <button class="text-btn" data-topic="motivation">Explore lesson →</button>
+      </article>
+    </div>
+  </section>
+
+  <section id="lessons">
+    <div class="heading">
+      <div>
+        <h2>Your learning room 📚</h2>
+        <p>Read a lesson and answer its quick question to mark it complete.</p>
+      </div>
+    </div>
+
+    <div class="lesson-area">
+      <aside class="lesson-sidebar">
+        <h3>My lessons</h3>
+        <div class="progress-track" role="progressbar"
+          aria-label="Lesson completion" aria-valuemin="0"
+          aria-valuemax="6" aria-valuenow="0" id="progressBar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="muted" id="progressLabel" aria-live="polite">0 of 6 lessons completed</p>
+        <div class="lesson-list" id="lessonList"></div>
+        <p class="muted">Your progress is saved on this device when browser storage is available.</p>
+      </aside>
+      <article class="lesson-content" id="lessonContent" aria-live="polite">
+        <p>Loading your lessons...</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="motivation">
+    <div class="heading">
+      <div>
+        <h2>A little reminder for you 💌</h2>
+        <p>Take a breath. You are learning and growing every day.</p>
+      </div>
+    </div>
+    <div class="quote-panel">
+      <div class="quote-mark" aria-hidden="true">“</div>
+      <p id="quoteText">Growing takes time. Give yourself room to bloom.</p>
+      <div class="quote-credit" id="quoteCredit">A Blooming Girl reminder</div>
+      <div class="buttons" style="justify-content:center">
+        <button class="btn lavender-btn" id="newQuote" type="button">New reminder ✨</button>
+        <button class="btn secondary" id="copyQuote" type="button">Copy quote</button>
+      </div>
+      <p class="feedback" id="quoteFeedback" role="status"></p>
+    </div>
+  </section>
+
+  <section id="journal">
+    <div class="heading">
+      <div>
+        <h2>My growth journal 🌷</h2>
+        <p>A place to reflect on your day, feelings, and goals.</p>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="panel">
+        <h3>How are you feeling today?</h3>
+        <label for="mood">My mood</label>
+        <select id="mood">
+          <option value="">Choose a mood...</option>
+          <option value="Happy">😊 Happy</option>
+          <option value="Calm">😌 Calm</option>
+          <option value="Excited">🤩 Excited</option>
+          <option value="Worried">😟 Worried</option>
+          <option value="Sad">😔 Sad</option>
+          <option value="Confused">🤔 Confused</option>
+          <option value="Hopeful">🌈 Hopeful</option>
+        </select>
+        <label for="journalText">What's on your mind?</label>
+        <textarea id="journalText" maxlength="5000"
+          placeholder="Today I felt... One thing I learned... One thing I'm proud of..."></textarea>
+        <div class="buttons">
+          <button class="btn primary" id="saveJournal" type="button">Save reflection</button>
+          <button class="btn secondary" id="clearJournal" type="button">Clear journal</button>
+        </div>
+        <p id="journalFeedback" class="feedback" role="status"></p>
+      </div>
+      <div class="panel">
+        <h3>A gentle reminder 💜</h3>
+        <p>Your feelings matter. You do not have to understand everything immediately or solve every problem alone.</p>
+        <p>Try writing about one small thing you learned, something you enjoyed, or a goal you want to work towards.</p>
+        <div class="privacy-note">
+          <strong>Privacy note:</strong> Your journal is stored in this browser on this device.
+          It is not a secure or password-protected diary. Do not enter passwords,
+          your home address, or other sensitive information. Other people using
+          your device or browser may be able to access it.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-box">
+      <div>
+        <h2>Let's talk, girl! 💗</h2>
+        <p>Have a question or suggestion about Blooming Girl? Send a message.</p>
+        <p class="notice">Never share passwords, private photos, or sensitive personal information with strangers.</p>
+      </div>
+      <a class="btn primary" id="contactLink"
+        href="https://wa.me/2348022792833?text=Hello%20Blooming%20Girl!%20I%20have%20a%20question%20or%20suggestion."
+        target="_blank" rel="noopener noreferrer">Message us on WhatsApp ↗</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="panel">
+      <h3>One important thing 💗</h3>
+      <p>
+        Blooming Girl provides general educational information, not a diagnosis
+        or a replacement for professional advice. Bodies and experiences differ.
+        If you are worried about your health, feel unsafe, or someone is
+        pressuring you, consider speaking with a trusted adult or qualified
+        health professional. You deserve to be treated with respect.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div>🌸 <strong>Blooming Girl</strong></div>
+  <div>A safe space to learn, grow, and bloom.</div>
+  <div>Made with 💗 for girls everywhere.</div>
+  <div>© <span id="year"></span> Blooming Girl</div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+
+  const lessons = [
+    {
+      id:"hygiene",
+      title:"Taking care of yourself",
+      category:"Personal hygiene",
+      icon:"🧼",
+      intro:"Personal hygiene means looking after your body to stay comfortable, clean, and healthy. It is about wellbeing, not looking perfect.",
+      points:[
+        "Wash your hands with soap and water, especially before eating and after using the toilet.",
+        "Bathe regularly and change into clean underwear and clothes.",
+        "Gently wash the outside of your private area with water. Avoid scented products and do not wash inside the vagina.",
+        "During your period, change pads regularly according to the product instructions and wash your hands before and after.",
+        "Brush your teeth twice daily and use a clean towel. Avoid sharing personal hygiene items.",
+        "If you notice unusual pain, persistent itching, or a strong unusual smell, ask a trusted adult or qualified health professional for help."
+      ],
+      takeaway:"Your body deserves care and respect. Hygiene is about health, not shame.",
+      question:"Which is a good daily hygiene habit?",
+      options:["Never change your underwear","Wash your hands with soap regularly","Use strong perfume instead of bathing"],
+      answer:1,
+      explanation:"Correct! Washing your hands helps reduce the spread of germs."
+    },
+    {
+      id:"puberty",
+      title:"Understanding puberty",
+      category:"Puberty & hormones",
+      icon:"🌱",
+      intro:"Puberty is the stage when a child's body gradually develops towards adulthood. It begins at different ages for different people, and changes do not happen on one fixed schedule.",
+      points:[
+        "Hormones are chemical messengers that help your body grow and change.",
+        "You may notice breast development, body hair, changes in body shape, or stronger body odour.",
+        "Periods are a normal part of puberty for many girls. Early cycles can be irregular.",
+        "Feelings may change, and you might feel excited, upset, or sensitive. Sleep, stress, and life events can also affect mood.",
+        "You do not need to compare your development with friends. People grow at different rates.",
+        "Ask a trusted adult or healthcare professional if you have concerns about your development or periods."
+      ],
+      takeaway:"There is no single perfect timeline for growing up. You deserve accurate information and kindness.",
+      question:"What is true about puberty?",
+      options:["Everyone develops at exactly the same age","Hormones help the body grow and change","Periods are something to be ashamed of"],
+  
